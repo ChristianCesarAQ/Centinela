@@ -5,7 +5,7 @@ consulta contexto via RAG y decide/ejecuta contencion automatica (LangGraph + MC
 en una VLAN de cuarentena, con cifrado hibrido (RSA/ECC + AES-256).
 
 ## Estructura del proyecto
-
+```
 Centinela/
 ├── backend/ # FastAPI + MCP server + LangGraph + RAG (Chroma)
 ├── sensor/ # Captura de trafico (scapy) + Isolation Forest
@@ -13,7 +13,7 @@ Centinela/
 ├── frontend/ # React + Vite + Tailwind (panel de alertas)
 ├── docs/ # Documentacion tecnica
 └── docker-compose.yml
-
+```
 
 ## Requisitos previos
 
