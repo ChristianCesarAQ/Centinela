@@ -20,6 +20,7 @@ services:
       - "8000:8000"
     networks:
       - vlan-corp
+      - vlan-mgmt
 
   sensor:
     build: ./sensor
@@ -36,9 +37,19 @@ services:
     profiles: [ "attack" ] # ataque solo cuando se active el perfil
     networks:
       - vlan-corp
+  
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - vlan-mgmt
 
 networks:
   vlan-corp:
     driver: bridge
   vlan-quarantine:
+    driver: bridge
+  vlan-mgmt:
     driver: bridge
