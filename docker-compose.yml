@@ -1,0 +1,44 @@
+services:
+  client-a:
+    image: alpine:3.19
+    container_name: client-a
+    command: sleep infinity
+    networks:
+      - vlan-corp
+
+  client-b:
+    image: alpine:3.19
+    container_name: client-b
+    command: sleep infinity
+    networks:
+      - vlan-corp
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "8000:8000"
+    networks:
+      - vlan-corp
+
+  sensor:
+    build: ./sensor
+    container_name: sensor
+    network_mode: host
+    cap_add:
+      #privileged
+      - NET_ADMIN
+      - NET_RAW
+
+  attacker:
+    build: ./attacker
+    container_name: attacker
+    profiles: [ "attack" ] # ataque solo cuando se active el perfil
+    networks:
+      - vlan-corp
+
+networks:
+  vlan-corp:
+    driver: bridge
+  vlan-quarantine:
+    driver: bridge
